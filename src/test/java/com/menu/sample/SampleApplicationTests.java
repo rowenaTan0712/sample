@@ -1,4 +1,4 @@
-package com.vuejs.sample;
+package com.menu.sample;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
