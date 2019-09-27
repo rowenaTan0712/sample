@@ -1,4 +1,4 @@
-package com.vuejs.sample.controllers;
+package com.menu.sample.controllers;
 
 import java.util.List;
 
@@ -14,44 +14,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vuejs.sample.exception.RecordNotFoundException;
-import com.vuejs.sample.models.Employee;
-import com.vuejs.sample.services.EmployeeService;
+import com.menu.sample.exception.RecordNotFoundException;
+import com.menu.sample.models.Food;
+import com.menu.sample.services.MenuService;
 
 @RestController
-@RequestMapping("/employees")
-public class EmployeeController {
+@RequestMapping("/menu")
+public class MenuController {
 	
 	@Autowired
-	private EmployeeService employeeService;
+	private MenuService menuService;
 	
 	@GetMapping
-	public ResponseEntity<List<Employee>> getEmployees(){
-		List<Employee> employees = employeeService.getEmployees();
-		return new ResponseEntity<List<Employee>>(employees, HttpStatus.OK);
+	public ResponseEntity<List<Food>> getMenus(){
+		List<Food> foods = menuService.getMenus();
+		return new ResponseEntity<List<Food>>(foods, HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Employee> getEmployee(@PathVariable("id") Long id) throws RecordNotFoundException {
-		Employee employee = employeeService.getEmployeeById(id);
-		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+	public ResponseEntity<Food> getMenu(@PathVariable("id") Long id) throws RecordNotFoundException {
+		Food food = menuService.getMenuById(id);
+		return new ResponseEntity<Food>(food, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/remove/{id}")
-	public HttpStatus removeEmployee(@PathVariable("id") Long id) throws RecordNotFoundException {
-		employeeService.deleteEmployee(id);
+	@DeleteMapping("/{id}")
+	public HttpStatus removeMenu(@PathVariable("id") Long id) throws RecordNotFoundException {
+		menuService.removeMenu(id);
 		return HttpStatus.ACCEPTED;
 	}
 	
 	@PutMapping
-	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
-		Employee response = employeeService.addEmployee(employee);
-		return new ResponseEntity<Employee>(response, HttpStatus.OK);
+	public ResponseEntity<Food> addMenu(@RequestBody Food food) {
+		Food response = menuService.addMenu(food);
+		return new ResponseEntity<Food>(response, HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee){
-		Employee response = employeeService.updateEmployee(employee);
-		return new ResponseEntity<Employee>(response, HttpStatus.OK);
+	public ResponseEntity<Food> updateMenu(@RequestBody Food food){
+		Food response = menuService.updateMenu(food);
+		return new ResponseEntity<Food>(response, HttpStatus.OK);
 	}
 }
