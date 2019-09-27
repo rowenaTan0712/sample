@@ -1,2 +1,2 @@
 # sample
-frontend used was vueJS and java spring boot for backend
+Sample CRUD backend using Spring boot and Java
